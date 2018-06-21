@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <!--<img alt="logo" height="40"   src="assets/imgs/logoit.png" >-->
+      Busca en iTUNES
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-searchbar [(ngModel)]="termino" (search)="buscar($event)" placeholder="Introduce artista o canción ...">
+  </ion-searchbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)">
+      <ion-segment-button value="cards">
+        CARDS
+      </ion-segment-button>
+      <ion-segment-button value="cubos">
+        CUBOS
+      </ion-segment-button>
+      <ion-segment-button value="desliz">
+        DESLIZ
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <ion-slides #mySlider (ionDidChange)="onSlideChanged($event)">
+    <ion-slide *ngFor="let slide of slides">
+      <h1>{{ slide.title }}</h1>
+    </ion-slide>
+  </ion-slides> 
+</ion-content>

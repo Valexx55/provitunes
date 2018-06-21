@@ -1,28 +1,25 @@
 import { Component, Inject, ViewChild } from '@angular/core';
-import { NavController, Slides } from 'ionic-angular';
-import { BusquedaObservableService, BusquedaInterface, SearchItemReducido, SearchItem } from 'itunes-ionic';
-import { CreditosComponent } from '../creditos/creditos';
-import { BusquedaPage } from '../busqueda/busqueda';
-import { FavoritosPage } from '../favoritos/favoritos';
+import { NavController, NavParams, Slides } from 'ionic-angular';
+import { SearchItem, BusquedaInterface } from 'itunes-ionic';
+
+/**
+ * Generated class for the BusquedaPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html',
-  providers: [{provide: 'BusquedaInterface', useClass: BusquedaObservableService}]
+  selector: 'page-busqueda',
+  templateUrl: 'busqueda.html',
 })
-export class HomePage {
-
-  icons
-  private termino:string;
+export class BusquedaPage {private termino:string;
   private resultados : SearchItem[];
 
   @ViewChild('mySlider') slider: Slides;
   selectedSegment: string;
   slides: any;
 
-  tab1Root = CreditosComponent;
-  tab2Root = BusquedaPage;
-  tab3Root = FavoritosPage;
 
   constructor(public navCtrl: NavController,@Inject('BusquedaInterface') public itunes_service:BusquedaInterface) {
     this.selectedSegment = 'cards';
@@ -68,7 +65,5 @@ export class HomePage {
           }
     )
   }
-
-
 
 }

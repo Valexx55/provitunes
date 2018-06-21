@@ -8,12 +8,17 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { HttpClientModule } from '@angular/common/http';
 import { CreditosComponent } from '../pages/creditos/creditos';
+import { FavoritosPage } from '../pages/favoritos/favoritos';
+import { BusquedaPage } from '../pages/busqueda/busqueda';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    CreditosComponent
+    CreditosComponent,
+    FavoritosPage,
+    BusquedaPage
+
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,9 @@ import { CreditosComponent } from '../pages/creditos/creditos';
   entryComponents: [
     MyApp,
     HomePage,
-    CreditosComponent
+    CreditosComponent,
+    FavoritosPage,
+    BusquedaPage
   ],
   providers: [
     StatusBar,
