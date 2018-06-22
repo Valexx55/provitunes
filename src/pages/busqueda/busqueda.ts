@@ -76,6 +76,47 @@ cerrarTeclado() {
     )
   }
 
+  playMuestra( cancion: SearchItem) {
+    //    document.getElementById("muestra").src = muestraCancion;
+    if (cancion.seleccionada)
+    {
+        let audioElement = document.getElementById(''+cancion.trackId);
+        console.log("audioElement " + audioElement );
+        audioElement['pause']();
+        cancion.seleccionada = false;
+        cancion.estado='play';
+
+    } else // canción no seleccionada
+    {
+        let audioElement = document.getElementById(''+cancion.trackId);
+        console.log("audioElement " + audioElement );
+        audioElement['play']();
+        audioElement.onended = function() {
+            cancion.seleccionada = false;
+            cancion.estado='play';
+        };
+        cancion.seleccionada = true;
+        cancion.estado='pause';
+
+    }
+    
+   //  previewUr
+    }
+
+  favorito (cancion : SearchItem) {
+    console.log ("HA DADO A FAVORITO")
+    if (cancion.favorita)
+    {
+        cancion.favorita = false;
+        cancion.estadofav = 'star-outline';
+    }
+    else {
+        cancion.favorita = true;
+        cancion.estadofav = 'star';
+
+    }
+}
+
   ionViewWillEnter() {
     this.tabBarElement.style.display = 'none';
   }

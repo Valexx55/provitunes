@@ -31,7 +31,7 @@
   <ion-slides #mySlider (ionSlideDidChange)="cambioSlide(slide)">
     <ion-slide *ngFor="let slide of slides">
       <div *ngIf="(selectedSegment=='cubos')">
-        cubos seleccionando
+        
         <div *ngIf="lista_canciones">
           <ion-slides effect="cube" pager="true" paginationType="fraction" loop="true" slidesPerView="1" style="background-color:aqua">
             <ion-slide *ngFor="let unacancion of lista_canciones">
@@ -45,10 +45,35 @@
         </div>
       </div>
       <div *ngIf="(selectedSegment=='desliz')">
-        desliz seleccionando
+        <div *ngIf="lista_canciones">
+          <ion-list class="list-avatar-page">
+              <ion-item-sliding *ngFor="let cancion of lista_canciones; let indice = index" >
+                <ion-item>
+                  <ion-avatar item-start>
+                      <img src="{{cancion.artworkUrl100}}">
+                  </ion-avatar>
+                  <h2>{{cancion.trackName}}</h2>
+                  <h3>{{cancion.artistName}}</h3> 
+                  <audio hidden controls id="{{cancion.trackId}}">
+                    <source src={{cancion.previewUrl}} type="audio/mpeg">
+                  </audio>  
+                  <ion-note item-end>{{cancion.trackPrice}}{{cancion.currency}}</ion-note>
+                </ion-item>
+                <ion-item-options>
+                    <button ion-button color="primary" (click)="playMuestra(cancion)"> <!--(click)="playMuestra({{cancion.previewUrl}})"-->
+                      <ion-icon [name]="cancion.estado"></ion-icon>
+                      Muestra
+                    </button>
+                    <button ion-button color="light"(click)="favorito(cancion)" > <!--(click)="playMuestra({{cancion.previewUrl}})"-->
+                      <ion-icon [name]="cancion.estadofav"></ion-icon>
+                      Favorito
+                    </button>
+                </ion-item-options>
+              </ion-item-sliding>
+          </ion-list>
+      </div>
       </div>
       <div *ngIf="(selectedSegment=='cards')">
-        cards seleccionando
         <div *ngIf="lista_canciones">
             <div *ngFor="let cancion of lista_canciones">
                 <hr>

@@ -9,13 +9,17 @@ import { List } from "ionic-angular";
 })
 export class CreditosComponent {
 
+  private visible_pascua : boolean;
+
   private foto_empresa : string;
   
   private gente : Companeros [];
   private clicks : number;
   constructor( ) {
-    this.clicks = 0;
+
     console.log ("constructor");
+    this.clicks = 0;
+    this.visible_pascua = false;
     this.foto_empresa = "assets/imgs/logo_CAS_noBackground.JPG";
 
     this.gente = [
@@ -35,13 +39,13 @@ export class CreditosComponent {
         nombre: "Amaya Valdiviejas Ruiz",
         github: "https://github.com/amaya1234",
         linkedin: "https://es.linkedin.com/in/amaya-valdiviejas-ruiz-3696869b",
-        image: "https://avatars2.githubusercontent.com/u/22312605?s=400&v=4"
+        image: "../../assets/imgs/foto_amaya.PNG"
       },
       {
         nombre: "Carlos Moreno",
         github: "https://github.com/cmcarlos",
-        linkedin:'',
-        image: "https://avatars0.githubusercontent.com/u/36521321?s=400&v=4"
+        linkedin:'https://www.linkedin.com/in/carlos-moreno-c%C3%A1mara-70222a48/',
+        image: "../../assets/imgs/foto_carlos.jpg"
       },
       {
         nombre: "Daniel Adrián Durán",
@@ -71,7 +75,7 @@ export class CreditosComponent {
         nombre: "Juan Madrigal Vergel",
         github: "https://github.com/Skattspa",
         linkedin: "https://www.linkedin.com/in/jmvergel/",
-        image: "https://avatars3.githubusercontent.com/u/15067035?s=400&v=4"
+        image: "../../assets/imgs/foto_juan.png"
       },
       {
         nombre: "Luis Martinez",
@@ -107,15 +111,13 @@ export class CreditosComponent {
     
   }
 
-  huevoPascua (){
+  huevoPascua(){
     console.log("click logo");
     this.clicks = this.clicks + 1
-    if (this.clicks === 7){
-      alert('has hecho click '+this.clicks+' veces');
-      let logo = document.getElementById('logo');
-      logo.setAttribute('src','../../assets/imgs/nuclear_bomb.gif');
-      logo.style.width = "500px";
-      logo.style.height = "500px";
+    if (this.clicks === 3){
+      console.log("logo visible logo");
+      this.mostrarGif();
+
       this.cleanClicks();
     } 
   }
@@ -123,4 +125,19 @@ export class CreditosComponent {
   cleanClicks(){
     this.clicks = 0;
   }
+
+  mostrarGif() {
+    
+    this.visible_pascua = true;
+    let audioElement = document.getElementById('carlton');
+    console.log("audioElement " + audioElement);
+
+    audioElement['play']();
+    audioElement.onended = () => {
+      this.visible_pascua = false;
+
+    }
+
+  }
+
 }

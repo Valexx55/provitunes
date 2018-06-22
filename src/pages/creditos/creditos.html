@@ -9,6 +9,7 @@
 
 
 <ion-content>
+
   <ion-list>
     <section ion-item *ngFor="let compi of gente">
       <!--(click)="itemTapped($event, item)"-->
@@ -25,10 +26,15 @@
         </a>
       </div>
     </section>
+    <div *ngIf="visible_pascua">
+        <img width="100%" height="50%" src="../../assets/imgs/iTunes.gif" alt="Error al cargar el gif" id="gif">
+    </div>
+    <audio hidden id="carlton" src="../../assets/audio/carlton3.mp3">
+    </audio>
     <div text-center>
         <img (click)=huevoPascua() src="{{foto_empresa}}" alt="logo cas" width="150px" height="150px" style= "margin: 10% 10%;">  
     </div>
-      
   </ion-list>
+  
 
 </ion-content>
