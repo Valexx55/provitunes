@@ -13,15 +13,19 @@ import { SearchItem, BusquedaInterface } from 'itunes-ionic';
   selector: 'page-busqueda',
   templateUrl: 'busqueda.html',
 })
-export class BusquedaPage {private termino:string;
-  private resultados : SearchItem[];
+export class BusquedaPage {
+
+  static LIMITE : number = 20;
+  private termino:string;
+  private lista_canciones : SearchItem[];
 
   @ViewChild('mySlider') slider: Slides;
   selectedSegment: string;
   slides: any;
-
+  tabBarElement : any;
 
   constructor(public navCtrl: NavController,@Inject('BusquedaInterface') public itunes_service:BusquedaInterface) {
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.selectedSegment = 'cards';
     this.slides = [
       {
@@ -40,6 +44,7 @@ export class BusquedaPage {private termino:string;
   }
 
   onSegmentChanged(segmentButton) {
+    this.selectedSegment = segmentButton.value;
     console.log("Segment changed to", segmentButton.value);
     const selectedIndex = this.slides.findIndex((slide) => {
       return slide.id === segmentButton.value;
@@ -47,23 +52,40 @@ export class BusquedaPage {private termino:string;
     this.slider.slideTo(selectedIndex);
   }
 
-  onSlideChanged(slider) {
+  cambioSlide() {
     console.log('Slide changed');
-    const currentSlide = this.slides[slider.activeIndex];
-    this.selectedSegment = currentSlide.id;
+    let currentSlide = this.slider.getActiveIndex();
+    this.selectedSegment =this.slides[currentSlide].id;
 }
 
+cerrarTeclado() {
+  let activeElement = <HTMLElement>document.activeElement;
+  activeElement && activeElement.blur && activeElement.blur();
+}
   buscar(evento)
   {
+    this.cerrarTeclado();
     console.log ("evento" + evento);
     console.log ("termino" + this.termino);
-    this.itunes_service.busca(this.termino).subscribe (
+    this.itunes_service.busca(this.termino, BusquedaPage.LIMITE).subscribe (
       ok => {
-        console.log (ok);
-        this.resultados = <SearchItem[]>ok.results;
-        console.log (this.resultados);
+        console.log ("RESULTADO BUSQEUDA =" + ok);
+        this.lista_canciones = <SearchItem[]>ok.results;
+        console.log ("RESULTADO cacniones =" +this.lista_canciones);
           }
     )
   }
 
+  ionViewWillEnter() {
+    this.tabBarElement.style.display = 'none';
+  }
+ 
+  ionViewWillLeave() {
+    this.tabBarElement.style.display = 'flex';
+  }
+
+  takeMeBack() {
+    this.navCtrl.parent.select(0);
+  }
 }
+

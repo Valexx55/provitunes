@@ -9,18 +9,26 @@
 
 
 <ion-content>
-      <ion-list>
-          <section ion-item *ngFor="let compi of gente" > <!--(click)="itemTapped($event, item)"-->
-            <ion-icon item-left>
-                <img src="{{compi.image}}" alt="No tienes foto" height="50px" width="50px" style="border-radius: 50%;">
-            </ion-icon> 
-            {{compi.nombre}}
-            <div class="item-note" item-right>
-              <a href="{{compi.github}}" target="_blank"><ion-icon name="logo-github"></ion-icon></a>
-              <a href="{{compi.linkedin}}" target="_blank">  <ion-icon name="logo-linkedin"></ion-icon></a>
-              </div>
-            </section>
-            <img id="logo" (click)=huevoPascua() src="{{foto_empresa}}" alt="logo cas" width="150px" height="150px" style= "margin: 5% 0% 0% 45%;">
-        </ion-list>
+  <ion-list>
+    <section ion-item *ngFor="let compi of gente">
+      <!--(click)="itemTapped($event, item)"-->
+      <ion-icon item-left>
+        <img src="{{compi.image}}" alt="No tienes foto" height="50px" width="50px" style="border-radius: 50%;">
+      </ion-icon>
+      {{compi.nombre}}
+      <div class="item-note" item-right>
+        <a href="{{compi.github}}" target="_blank">
+          <ion-icon name="logo-github"></ion-icon>
+        </a>
+        <a href="{{compi.linkedin}}" target="_blank">
+          <ion-icon name="logo-linkedin"></ion-icon>
+        </a>
+      </div>
+    </section>
+    <div text-center>
+        <img (click)=huevoPascua() src="{{foto_empresa}}" alt="logo cas" width="150px" height="150px" style= "margin: 10% 10%;">  
+    </div>
+      
+  </ion-list>
 
 </ion-content>

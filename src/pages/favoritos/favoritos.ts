@@ -14,11 +14,18 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class FavoritosPage {
 
+  tabBarElement : any;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FavoritosPage');
+  }
+
+  takeMeBack() {
+    this.navCtrl.parent.select(0);
   }
 
 }

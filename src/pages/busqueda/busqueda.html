@@ -1,15 +1,20 @@
 <ion-header>
   <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="takeMeBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
-      <!--<img alt="logo" height="40"   src="assets/imgs/logoit.png" >-->
-      Busca en iTUNES
+      Búsqueda en iTunes
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-searchbar [(ngModel)]="termino" (search)="buscar($event)" placeholder="Introduce artista o canción ...">
+<ion-content>
+  <ion-searchbar animated="true" [(ngModel)]="termino" (search)="buscar($event)" placeholder="Introduce canción ...">
   </ion-searchbar>
+
   <ion-toolbar>
     <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)">
       <ion-segment-button value="cards">
@@ -23,9 +28,46 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
-  <ion-slides #mySlider (ionDidChange)="onSlideChanged($event)">
+  <ion-slides #mySlider (ionSlideDidChange)="cambioSlide(slide)">
     <ion-slide *ngFor="let slide of slides">
-      <h1>{{ slide.title }}</h1>
+      <div *ngIf="(selectedSegment=='cubos')">
+        cubos seleccionando
+        <div *ngIf="lista_canciones">
+          <ion-slides effect="cube" pager="true" paginationType="fraction" loop="true" slidesPerView="1" style="background-color:aqua">
+            <ion-slide *ngFor="let unacancion of lista_canciones">
+              <h3>{{unacancion.artistName}}</h3>
+              <h3>{{unacancion.trackName}} </h3>
+              <h4> {{unacancion.trackPrice}} {{unacancion.currency}}</h4>
+              <img data-src="{{unacancion.artworkUrl100}}">
+              <audio src="{{unacancion.previewUrl}}" controls="true"></audio>
+            </ion-slide>
+          </ion-slides>
+        </div>
+      </div>
+      <div *ngIf="(selectedSegment=='desliz')">
+        desliz seleccionando
+      </div>
+      <div *ngIf="(selectedSegment=='cards')">
+        cards seleccionando
+        <div *ngIf="lista_canciones">
+            <div *ngFor="let cancion of lista_canciones">
+                <hr>
+                <ion-card>
+                  <img src="{{cancion.artworkUrl100}}" alt="Portada" width="100px">
+                  <ion-card-content>
+                    <ion-card-title>
+                      {{cancion.artistName}}: {{cancion.trackName}}
+                    </ion-card-title>
+                    <p>
+                      <audio src="{{cancion.previewUrl}}" controls></audio> <br>
+                      Id: {{cancion.trackId}} <br>
+                      Precio: {{cancion.trackPrice}} {{cancion.currency}}
+                    </p>
+                  </ion-card-content>
+                 </ion-card>
+            </div>
+        </div>
+      </div>
     </ion-slide>
-  </ion-slides> 
+  </ion-slides>
 </ion-content>
