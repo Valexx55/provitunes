@@ -1,24 +1,23 @@
-<!--
-  Generated template for the FavoritosPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-    <ion-navbar>
-        <ion-buttons left>
-         <button ion-button icon-only (click)="takeMeBack()">
-            <ion-icon name="arrow-back"></ion-icon>
-        </button>
-      </ion-buttons>
-     <ion-title>
-       Favoritos
-     </ion-title>
-   </ion-navbar>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mi lista de favoritos</ion-title>
+  </ion-navbar>
 </ion-header>
 
-
-<ion-content padding>
-
+<ion-content>
+  <div *ngIf="!lista_favoritos">
+    <br>
+    <p>     No ha almacenado ningún favorito</p>
+  </div>
+  <ion-list>
+    <button ion-item *ngFor="let cancion of lista_favoritos" (click)="itemTapped($event, cancion)">
+      <ion-avatar item-start><img src="{{cancion.artworkUrl100}}"></ion-avatar >
+      <div>{{cancion.titulo}}</div>
+      <div class="item-note" item-right>{{cancion.trackName}}</div>
+      <ion-icon (click)="itemDeleted($event, cancion)"item-right name="trash"></ion-icon>
+    </button>
+  </ion-list>
 </ion-content>

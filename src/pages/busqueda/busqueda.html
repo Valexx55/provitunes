@@ -34,12 +34,15 @@
         
         <div *ngIf="lista_canciones">
           <ion-slides effect="cube" pager="true" paginationType="fraction" loop="true" slidesPerView="1" style="background-color:aqua">
-            <ion-slide *ngFor="let unacancion of lista_canciones">
-              <h3>{{unacancion.artistName}}</h3>
-              <h3>{{unacancion.trackName}} </h3>
-              <h4> {{unacancion.trackPrice}} {{unacancion.currency}}</h4>
-              <img data-src="{{unacancion.artworkUrl100}}">
-              <audio src="{{unacancion.previewUrl}}" controls="true"></audio>
+            <ion-slide *ngFor="let cancion of lista_canciones">
+              <h3>{{cancion.artistName}}</h3>
+              <h3>{{cancion.trackName}} </h3>
+              <img data-src="{{cancion.artworkUrl100}}">
+              <button ion-button color="light"(click)="favorito(cancion)" > <!--(click)="playMuestra({{cancion.previewUrl}})"-->
+                <ion-icon [name]="cancion.estadofav"></ion-icon>
+                Favorito
+              </button>
+              <audio src="{{cancion.previewUrl}}" controls="true"></audio>
             </ion-slide>
           </ion-slides>
         </div>
@@ -57,9 +60,9 @@
                   <audio hidden controls id="{{cancion.trackId}}">
                     <source src={{cancion.previewUrl}} type="audio/mpeg">
                   </audio>  
-                  <ion-note item-end>{{cancion.trackPrice}}{{cancion.currency}}</ion-note>
+                  <!--<ion-note item-end>{{cancion.trackPrice}}{{cancion.currency}}</ion-note>-->
                 </ion-item>
-                <ion-item-options>
+                <ion-item-options side="right">
                     <button ion-button color="primary" (click)="playMuestra(cancion)"> <!--(click)="playMuestra({{cancion.previewUrl}})"-->
                       <ion-icon [name]="cancion.estado"></ion-icon>
                       Muestra
@@ -79,14 +82,16 @@
                 <hr>
                 <ion-card>
                   <img src="{{cancion.artworkUrl100}}" alt="Portada" width="100px">
+                  <button ion-button color="light"(click)="favorito(cancion)" > <!--(click)="playMuestra({{cancion.previewUrl}})"-->
+                    <ion-icon [name]="cancion.estadofav"></ion-icon>
+                    Favorito
+                  </button>
                   <ion-card-content>
                     <ion-card-title>
-                      {{cancion.artistName}}: {{cancion.trackName}}
+                      {{cancion.artistName}} - {{cancion.trackName}}
                     </ion-card-title>
                     <p>
                       <audio src="{{cancion.previewUrl}}" controls></audio> <br>
-                      Id: {{cancion.trackId}} <br>
-                      Precio: {{cancion.trackPrice}} {{cancion.currency}}
                     </p>
                   </ion-card-content>
                  </ion-card>

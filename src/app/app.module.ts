@@ -1,15 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
+import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { HttpClientModule } from '@angular/common/http';
 import { CreditosComponent } from '../pages/creditos/creditos';
 import { FavoritosPage } from '../pages/favoritos/favoritos';
 import { BusquedaPage } from '../pages/busqueda/busqueda';
+import { ItemDetailsPage } from '../pages/item-details-favs/item-details';
+//import { SplashScreen } from '@ionic-native/splash-screen';
 
 @NgModule({
   declarations: [
@@ -17,13 +18,15 @@ import { BusquedaPage } from '../pages/busqueda/busqueda';
     HomePage,
     CreditosComponent,
     FavoritosPage,
-    BusquedaPage
+    BusquedaPage,
+    ItemDetailsPage
 
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -31,11 +34,12 @@ import { BusquedaPage } from '../pages/busqueda/busqueda';
     HomePage,
     CreditosComponent,
     FavoritosPage,
-    BusquedaPage
+    BusquedaPage,
+    ItemDetailsPage
   ],
   providers: [
     StatusBar,
-    SplashScreen,
+   // SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

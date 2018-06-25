@@ -11,6 +11,8 @@ export class CreditosComponent {
 
   private visible_pascua : boolean;
 
+  private caltongif : string;
+
   private foto_empresa : string;
   
   private gente : Companeros [];
@@ -21,7 +23,7 @@ export class CreditosComponent {
     this.clicks = 0;
     this.visible_pascua = false;
     this.foto_empresa = "assets/imgs/logo_CAS_noBackground.JPG";
-
+    //this.caltongif = "assets/imgs/iTunes.gif"
     this.gente = [
       {
         nombre: "Angel J. Cachón",
@@ -39,13 +41,13 @@ export class CreditosComponent {
         nombre: "Amaya Valdiviejas Ruiz",
         github: "https://github.com/amaya1234",
         linkedin: "https://es.linkedin.com/in/amaya-valdiviejas-ruiz-3696869b",
-        image: "../../assets/imgs/foto_amaya.PNG"
+        image: "assets/imgs/foto_amaya.png"
       },
       {
         nombre: "Carlos Moreno",
         github: "https://github.com/cmcarlos",
         linkedin:'https://www.linkedin.com/in/carlos-moreno-c%C3%A1mara-70222a48/',
-        image: "../../assets/imgs/foto_carlos.jpg"
+        image: "assets/imgs/foto_carlos.jpg"
       },
       {
         nombre: "Daniel Adrián Durán",
@@ -75,7 +77,7 @@ export class CreditosComponent {
         nombre: "Juan Madrigal Vergel",
         github: "https://github.com/Skattspa",
         linkedin: "https://www.linkedin.com/in/jmvergel/",
-        image: "../../assets/imgs/foto_juan.png"
+        image: "assets/imgs/foto_juan.png"
       },
       {
         nombre: "Luis Martinez",
@@ -101,7 +103,7 @@ export class CreditosComponent {
         linkedin: "https://www.linkedin.com/in/obdulia-zamora-dom%C3%A9nech-081a4742/",
         image: "https://media.licdn.com/dms/image/C5603AQG_xhKpDTQeIA/profile-displayphoto-shrink_800_800/0?e=1534982400&v=beta&t=hUabZttXiTHKToU3_Igl1Oe2B62VcefppPTeQ7H0ENE"
       }      
-    ];
+];
     
     this.mostrar(this.gente);
   }
@@ -113,27 +115,28 @@ export class CreditosComponent {
 
   huevoPascua(){
     console.log("click logo");
-    this.clicks = this.clicks + 1
-    if (this.clicks === 3){
+    this.clicks = this.clicks + 1;
+    if (this.clicks == 3){
       console.log("logo visible logo");
       this.mostrarGif();
-
       this.cleanClicks();
     } 
   }
 
   cleanClicks(){
     this.clicks = 0;
+    
   }
 
   mostrarGif() {
-    
     this.visible_pascua = true;
     let audioElement = document.getElementById('carlton');
     console.log("audioElement " + audioElement);
-
+    //this.caltongif="https://raw.githubusercontent.com/Valexx55/AngularItunes/master/iTunes.gif?"+new Date().getTime();
+    this.caltongif="assets/imgs/iTunes.gif?"+new Date().getTime();
     audioElement['play']();
     audioElement.onended = () => {
+      this.caltongif="";//assets/imgs/iTunes.gif
       this.visible_pascua = false;
 
     }

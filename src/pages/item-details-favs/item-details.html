@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle *ngIf="!selectedItem">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cancion favorita</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <TABLE BORDER>
+    <TR>
+      <TD>
+        <div>
+          <img id="img1" src={{selectedItem.src}} alt="Caratula" height="250px" width="300px"/>
+        </div>
+      </TD>
+    </TR>
+    <TR> 
+      <TD>
+        <div>
+          <p id=titulo1 > Titulo: {{selectedItem.titulo}}</p>
+          <p id=autor1 > Autor: {{selectedItem.autor}}</p>
+          <p id="oculto1" style="display:none"> ID</p>
+          <audio id="audio1" src={{selectedItem.audio}} controls></audio>
+        </div>
+    </TD> 
+    </TR>
+  </TABLE>
+
+</ion-content>
+
